@@ -95,6 +95,7 @@ class FileStorage:
     def get_stats(self) -> AggregateStats:
         sessions = self.list_sessions(limit=10000)
         stats = AggregateStats(total_sessions=len(sessions))
+        total_alert = 0.0
         for si in sessions:
             entries = self.get_session(si.session_id)
             stats.total_steps += len(entries)
@@ -102,11 +103,14 @@ class FileStorage:
                 alert = entry.get("alert_level", 0.0)
                 if isinstance(alert, (int, float)):
                     stats.max_alert_level = max(stats.max_alert_level, alert)
+                    total_alert += alert
+                verdict = entry.get("verdict", "UNKNOWN")
+                stats.verdict_distribution[verdict] = stats.verdict_distribution.get(verdict, 0) + 1
                 blocked = entry.get("blocked", False)
                 if blocked:
                     stats.blocked_count += 1
         if stats.total_steps > 0:
-            stats.avg_alert_level = stats.max_alert_level / stats.total_steps
+            stats.avg_alert_level = total_alert / stats.total_steps
         return stats
 
 
