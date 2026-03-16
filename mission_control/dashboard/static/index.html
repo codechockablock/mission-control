@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Control — Agent Safety Dashboard</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <header>
+        <h1>Mission Control</h1>
+        <span class="subtitle">Runtime Agent Safety Platform</span>
+        <span id="ws-status" class="ws-disconnected">disconnected</span>
+    </header>
+
+    <nav>
+        <button class="tab active" data-view="live">Live Feed</button>
+        <button class="tab" data-view="sessions">Sessions</button>
+        <button class="tab" data-view="stats">Stats</button>
+        <button class="tab" data-view="audit">Audit</button>
+    </nav>
+
+    <main>
+        <!-- Live Feed -->
+        <section id="view-live" class="view active">
+            <div class="toolbar">
+                <span id="event-count">0 events</span>
+                <button id="clear-feed">Clear</button>
+            </div>
+            <div id="live-feed" class="feed"></div>
+        </section>
+
+        <!-- Sessions -->
+        <section id="view-sessions" class="view">
+            <div id="session-list" class="session-list">
+                <p class="muted">Loading sessions...</p>
+            </div>
+            <div id="session-detail" class="session-detail" style="display:none">
+                <h3 id="detail-session-id"></h3>
+                <div id="detail-entries" class="feed"></div>
+            </div>
+        </section>
+
+        <!-- Stats -->
+        <section id="view-stats" class="view">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-label">Sessions</span>
+                    <span class="stat-value" id="stat-sessions">-</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Total Steps</span>
+                    <span class="stat-value" id="stat-steps">-</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Blocked</span>
+                    <span class="stat-value stat-blocked" id="stat-blocked">-</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Max Alert</span>
+                    <span class="stat-value" id="stat-max-alert">-</span>
+                </div>
+            </div>
+            <div id="verdict-chart" class="verdict-chart"></div>
+        </section>
+
+        <!-- Audit -->
+        <section id="view-audit" class="view">
+            <div class="audit-form">
+                <button id="verify-chain">Verify Current Chain</button>
+                <div id="audit-result" class="audit-result"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="/app.js"></script>
+</body>
+</html>

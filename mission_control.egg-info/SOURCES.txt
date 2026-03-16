@@ -1,3 +1,5 @@
+LICENSE
+README.md
 pyproject.toml
 mission_control/__init__.py
 mission_control.egg-info/PKG-INFO
@@ -13,7 +15,19 @@ mission_control/circuit_breaker/builtins.py
 mission_control/circuit_breaker/rules.py
 mission_control/cli/__init__.py
 mission_control/cli/main.py
+mission_control/dashboard/__init__.py
+mission_control/dashboard/app.py
 mission_control/recorder/__init__.py
 mission_control/recorder/recorder.py
 mission_control/recorder/session.py
 mission_control/recorder/storage.py
+mission_control/server/__init__.py
+mission_control/server/app.py
+mission_control/server/middleware.py
+mission_control/server/ws.py
+mission_control/server/routes/__init__.py
+mission_control/server/routes/audit.py
+mission_control/server/routes/constitution.py
+mission_control/server/routes/evaluate.py
+mission_control/server/routes/session.py
+mission_control/server/routes/stats.py
