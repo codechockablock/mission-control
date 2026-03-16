@@ -63,4 +63,29 @@ def create_app(mc: Optional[MissionControl] = None) -> FastAPI:
         app.state.mc = mc
     app.state.constitutions = {}
 
+    # Mount dashboard at root
+    from pathlib import Path
+    from fastapi.responses import HTMLResponse, Response
+
+    static_dir = Path(__file__).parent.parent / "dashboard" / "static"
+    if static_dir.exists():
+        @app.get("/")
+        async def dashboard_index():
+            content = (static_dir / "index.html").read_text()
+            content = content.replace("{{API_URL}}", "")
+            return HTMLResponse(content)
+
+        @app.get("/app.js")
+        async def dashboard_js():
+            content = (static_dir / "app.js").read_text()
+            content = content.replace("{{API_URL}}", "")
+            return Response(content=content, media_type="application/javascript")
+
+        @app.get("/style.css")
+        async def dashboard_css():
+            return Response(
+                content=(static_dir / "style.css").read_text(),
+                media_type="text/css",
+            )
+
     return app
