@@ -1,0 +1,14 @@
+frontier-ops[governance,kalman] @ file:///Users/joseph/frontier-ops
+fastapi>=0.100
+uvicorn[standard]>=0.20
+pydantic>=2.0
+
+[all]
+jinja2>=3.1
+
+[dashboard]
+jinja2>=3.1
+
+[dev]
+pytest>=7
+pytest-asyncio>=0.21
